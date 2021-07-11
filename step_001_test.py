@@ -78,21 +78,23 @@ class TestField(unittest.TestCase):
         self.assertEqual(neighbors, 4)
 
     def test_handle_cells(self):
-        def _generator(column, row):
-            return (column > 0 and row > 0) or row == 2
-
         cells = []
         def _handler(column, row, cell):
             cells.append((column, row, cell))
 
-        field = step_001.Field(2, 3, _generator)
+        field = step_001.Field(2, 3)
+        field._cell_rows = [
+            [False, False],
+            [True,  False],
+            [True,  True ],
+        ]
         field.handle_cells(_handler)
 
         self.assertEqual(cells, [
             (0, 0, False),
             (1, 0, False),
-            (0, 1, False),
-            (1, 1, True),
+            (0, 1, True),
+            (1, 1, False),
             (0, 2, True),
             (1, 2, True),
         ])
