@@ -1,5 +1,7 @@
 import time
 
+from robot_life.field import Field
+
 # https://www.conwaylife.com/wiki/Plaintext
 def to_plaintext(field):
     characters = []
@@ -27,3 +29,13 @@ def run_field(field, population_period=0.1, handler=lambda field: print(to_plain
             time.sleep(population_period - elapsed_time)
 
         previous_time = current_time
+
+# resolution of terminal VT100 by default
+def run_random_field(
+    width=80,
+    height=24,
+    population_period=0.1,
+    handler=lambda field: print(to_plaintext(field)),
+):
+    field = Field(width, height, Field.random_generator)
+    run_field(field, population_period, handler)
