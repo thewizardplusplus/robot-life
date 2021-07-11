@@ -75,16 +75,16 @@ class TestField(unittest.TestCase):
     def test_handle_cells(self):
         cells = []
 
-        field = step_001.Field(2, 3)
+        field = step_001.Field(2, 3, lambda column, row: (column > 0 and row > 0) or row == 2)
         field.handle_cells(lambda column, row, cell: cells.append((column, row, cell)))
 
         self.assertEqual(cells, [
             (0, 0, False),
             (1, 0, False),
             (0, 1, False),
-            (1, 1, False),
-            (0, 2, False),
-            (1, 2, False),
+            (1, 1, True),
+            (0, 2, True),
+            (1, 2, True),
         ])
 
     def test_populate(self):
