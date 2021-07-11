@@ -1,18 +1,11 @@
-import os.path
-import importlib.util
 import unittest
 import random
 
-# workaround for loading the module from the neighbor file
-# without defining the parent module
-step_001_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "step_001.py")
-step_001_spec = importlib.util.spec_from_file_location("step_001", step_001_path)
-step_001 = importlib.util.module_from_spec(step_001_spec)
-step_001_spec.loader.exec_module(step_001)
+from robot_life.field import Field
 
 class TestField(unittest.TestCase):
     def test_init_with_default_generator(self):
-        field = step_001.Field(2, 3)
+        field = Field(2, 3)
 
         self.assertEqual(field._width, 2)
         self.assertEqual(field._height, 3)
@@ -26,7 +19,7 @@ class TestField(unittest.TestCase):
         def _generator(column, row):
             return (column > 0 and row > 0) or row == 2
 
-        field = step_001.Field(2, 3, _generator)
+        field = Field(2, 3, _generator)
 
         self.assertEqual(field._width, 2)
         self.assertEqual(field._height, 3)
@@ -41,7 +34,7 @@ class TestField(unittest.TestCase):
         def _generator(column, row):
             return random.choice([False, True])
 
-        field = step_001.Field(2, 3, _generator)
+        field = Field(2, 3, _generator)
 
         self.assertEqual(field._width, 2)
         self.assertEqual(field._height, 3)
@@ -52,7 +45,7 @@ class TestField(unittest.TestCase):
         ])
 
     def test_get_neighbors_in_the_center(self):
-        field = step_001.Field(5, 5)
+        field = Field(5, 5)
         field._cell_rows = [
             [False, False, False, False, False],
             [False, False, True,  False, False],
@@ -66,7 +59,7 @@ class TestField(unittest.TestCase):
         self.assertEqual(neighbors, 3)
 
     def test_get_neighbors_in_the_corner(self):
-        field = step_001.Field(3, 3)
+        field = Field(3, 3)
         field._cell_rows = [
             [True,  False, False],
             [False, True,  True ],
@@ -82,7 +75,7 @@ class TestField(unittest.TestCase):
         def _handler(column, row, cell):
             cells.append((column, row, cell))
 
-        field = step_001.Field(2, 3)
+        field = Field(2, 3)
         field._cell_rows = [
             [False, False],
             [True,  False],
@@ -100,7 +93,7 @@ class TestField(unittest.TestCase):
         ])
 
     def test_populate_cell_that_will_be_born(self):
-        field = step_001.Field(5, 5)
+        field = Field(5, 5)
         field._cell_rows = [
             [False, False, False, False, False],
             [False, False, True,  False, False],
@@ -114,7 +107,7 @@ class TestField(unittest.TestCase):
         self.assertTrue(next_cell)
 
     def test_populate_cell_that_will_survive(self):
-        field = step_001.Field(5, 5)
+        field = Field(5, 5)
         field._cell_rows = [
             [False, False, False, False, False],
             [False, False, True,  False, False],
@@ -128,7 +121,7 @@ class TestField(unittest.TestCase):
         self.assertTrue(next_cell)
 
     def test_populate_cell_that_will_die(self):
-        field = step_001.Field(5, 5)
+        field = Field(5, 5)
         field._cell_rows = [
             [False, False, False, False, False],
             [False, False, True,  False, False],
@@ -142,7 +135,7 @@ class TestField(unittest.TestCase):
         self.assertFalse(next_cell)
 
     def test_populate(self):
-        field = step_001.Field(5, 5)
+        field = Field(5, 5)
         field._cell_rows = [
             [False, False, False, False, False],
             [False, False, True,  False, False],
@@ -164,7 +157,7 @@ class TestField(unittest.TestCase):
         ])
 
     def test_populate_with_not_square_field(self):
-        field = step_001.Field(5, 7)
+        field = Field(5, 7)
         field._cell_rows = [
             [False, False, False, False, False],
             [False, False, False, False, False],
