@@ -18,3 +18,18 @@ class TestField(unittest.TestCase):
             [False, False],
             [False, False],
         ])
+
+    def test_for_each_cell(self):
+        cells = []
+
+        field = step_001.Field(2, 3)
+        field.for_each_cell(lambda x, y, cell: cells.append((x, y, cell)))
+
+        self.assertEqual(cells, [
+            (0, 0, False),
+            (1, 0, False),
+            (0, 1, False),
+            (1, 1, False),
+            (0, 2, False),
+            (1, 2, False),
+        ])
