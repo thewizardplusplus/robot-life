@@ -34,3 +34,14 @@ class Field:
             for x in range(self._width):
                 cell = self._cells[y][x]
                 handler(x, y, cell)
+
+    def populate(self):
+        next_field = Field(self._width, self._height)
+        def _next_field_filler(x, y, cell):
+            neighbors = self.get_neighbors(x, y)
+            will_be_born = not cell and neighbors == 3
+            will_survive = cell and (neighbors == 2 or neighbors == 3)
+            next_field._cells[y][x] = will_be_born or will_survive
+
+        self.handle_cells(_next_field_filler)
+        return next_field

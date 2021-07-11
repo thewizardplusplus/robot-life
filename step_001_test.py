@@ -86,3 +86,51 @@ class TestField(unittest.TestCase):
             (0, 2, False),
             (1, 2, False),
         ])
+
+    def test_populate(self):
+        field = step_001.Field(5, 5)
+        field._cells = [
+            [False, False, False, False, False],
+            [False, False, True, False, False],
+            [False, False, False, True, False],
+            [False, True, True, True, False],
+            [False, False, False, False, False],
+        ]
+
+        next_field = field.populate()
+
+        self.assertEqual(next_field._width, 5)
+        self.assertEqual(next_field._height, 5)
+        self.assertEqual(next_field._cells, [
+            [False, False, False, False, False],
+            [False, False, False, False, False],
+            [False, True, False, True, False],
+            [False, False, True, True, False],
+            [False, False, True, False, False],
+        ])
+
+    def test_populate_with_not_square_field(self):
+        field = step_001.Field(5, 7)
+        field._cells = [
+            [False, False, False, False, False],
+            [False, False, False, False, False],
+            [False, False, True, False, False],
+            [False, False, False, True, False],
+            [False, True, True, True, False],
+            [False, False, False, False, False],
+            [False, False, False, False, False],
+        ]
+
+        next_field = field.populate()
+
+        self.assertEqual(next_field._width, 5)
+        self.assertEqual(next_field._height, 7)
+        self.assertEqual(next_field._cells, [
+            [False, False, False, False, False],
+            [False, False, False, False, False],
+            [False, False, False, False, False],
+            [False, True, False, True, False],
+            [False, False, True, True, False],
+            [False, False, True, False, False],
+            [False, False, False, False, False],
+        ])
