@@ -19,9 +19,14 @@ class Field:
                 if column_offset == 0 and row_offset == 0:
                     continue
 
+                transformed_column = column + column_offset
+                transformed_row = row + row_offset
+
                 # wrap the coordinates to simulate a toroidal field
-                transformed_column = (column + column_offset + self._width) % self._width
-                transformed_row = (row + row_offset + self._height) % self._height
+                transformed_column = \
+                    (transformed_column + self._width) % self._width
+                transformed_row = \
+                    (transformed_row + self._height) % self._height
 
                 cell = self._cell_rows[transformed_row][transformed_column]
                 if cell:
