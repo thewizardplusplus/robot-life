@@ -14,6 +14,8 @@ class TestField(unittest.TestCase):
     def test_init_with_default_generator(self):
         field = step_001.Field(2, 3)
 
+        self.assertEqual(field._width, 2)
+        self.assertEqual(field._height, 3)
         self.assertEqual(field._cells, [
             [False, False],
             [False, False],
@@ -23,6 +25,8 @@ class TestField(unittest.TestCase):
     def test_init_with_custom_generator(self):
         field = step_001.Field(2, 3, lambda x, y: (x > 0 and y > 0) or y == 2)
 
+        self.assertEqual(field._width, 2)
+        self.assertEqual(field._height, 3)
         self.assertEqual(field._cells, [
             [False, False],
             [False, True],
@@ -34,6 +38,8 @@ class TestField(unittest.TestCase):
 
         field = step_001.Field(2, 3, lambda x, y: random.choice([False, True]))
 
+        self.assertEqual(field._width, 2)
+        self.assertEqual(field._height, 3)
         self.assertEqual(field._cells, [
             [False, False],
             [True, False],

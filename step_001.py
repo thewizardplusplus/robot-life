@@ -1,5 +1,8 @@
 class Field:
     def __init__(self, width, height, generator=lambda x, y: False):
+        self._width = width
+        self._height = height
+
         self._cells = []
         for y in range(height):
             line = []
@@ -10,6 +13,7 @@ class Field:
             self._cells.append(line)
 
     def for_each_cell(self, handler):
-        for y, line in enumerate(self._cells):
-            for x, cell in enumerate(line):
+        for y in range(self._height):
+            for x in range(self._width):
+                cell = self._cells[y][x]
                 handler(x, y, cell)
