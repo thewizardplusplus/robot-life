@@ -46,6 +46,32 @@ class TestField(unittest.TestCase):
             [True, True],
         ])
 
+    def test_get_neighbors_in_the_center(self):
+        field = step_001.Field(5, 5)
+        field._cells = [
+            [False, False, False, False, False],
+            [False, False, True, False, False],
+            [False, False, False, True, False],
+            [False, True, True, True, False],
+            [False, False, False, False, False],
+        ]
+
+        neighbors = field.get_neighbors(1, 2)
+
+        self.assertEqual(neighbors, 3)
+
+    def test_get_neighbors_in_the_corner(self):
+        field = step_001.Field(3, 3)
+        field._cells = [
+            [True, False, False],
+            [False, True, True],
+            [False, True, True],
+        ]
+
+        neighbors = field.get_neighbors(2, 2)
+
+        self.assertEqual(neighbors, 4)
+
     def test_handle_cells(self):
         cells = []
 
