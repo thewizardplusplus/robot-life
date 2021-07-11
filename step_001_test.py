@@ -87,6 +87,48 @@ class TestField(unittest.TestCase):
             (1, 2, True),
         ])
 
+    def test_populate_cell_that_will_be_born(self):
+        field = step_001.Field(5, 5)
+        field._cell_rows = [
+            [False, False, False, False, False],
+            [False, False, True,  False, False],
+            [False, False, False, True,  False],
+            [False, True,  True,  True,  False],
+            [False, False, False, False, False],
+        ]
+
+        next_cell = field.populate_cell(2, 4)
+
+        self.assertTrue(next_cell)
+
+    def test_populate_cell_that_will_survive(self):
+        field = step_001.Field(5, 5)
+        field._cell_rows = [
+            [False, False, False, False, False],
+            [False, False, True,  False, False],
+            [False, False, False, True,  False],
+            [False, True,  True,  True,  False],
+            [False, False, False, False, False],
+        ]
+
+        next_cell = field.populate_cell(2, 3)
+
+        self.assertTrue(next_cell)
+
+    def test_populate_cell_that_will_die(self):
+        field = step_001.Field(5, 5)
+        field._cell_rows = [
+            [False, False, False, False, False],
+            [False, False, True,  False, False],
+            [False, False, False, True,  False],
+            [False, True,  True,  True,  False],
+            [False, False, False, False, False],
+        ]
+
+        next_cell = field.populate_cell(1, 3)
+
+        self.assertFalse(next_cell)
+
     def test_populate(self):
         field = step_001.Field(5, 5)
         field._cell_rows = [

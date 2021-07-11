@@ -40,15 +40,20 @@ class Field:
                 cell = self._cell_rows[row][column]
                 handler(column, row, cell)
 
+    def populate_cell(self, column, row):
+        cell = self._cell_rows[row][column]
+        neighbors = self.get_neighbors(column, row)
+
+        will_be_born = not cell and neighbors == 3
+        will_survive = cell and (neighbors == 2 or neighbors == 3)
+
+        return will_be_born or will_survive
+
     def populate(self):
         next_field = Field(self._width, self._height)
         def _next_field_filler(column, row, cell):
-            neighbors = self.get_neighbors(column, row)
-
-            will_be_born = not cell and neighbors == 3
-            will_survive = cell and (neighbors == 2 or neighbors == 3)
-
-            next_field._cell_rows[row][column] = will_be_born or will_survive
+            next_cell = self.populate_cell(column, row)
+            next_field._cell_rows[row][column] = next_cell
 
         self.handle_cells(_next_field_filler)
 
