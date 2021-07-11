@@ -29,8 +29,8 @@ class TestField(unittest.TestCase):
         self.assertEqual(field._height, 3)
         self.assertEqual(field._cell_rows, [
             [False, False],
-            [False, True],
-            [True, True],
+            [False, True ],
+            [True,  True ],
         ])
 
     def test_init_with_random_generator(self):
@@ -42,17 +42,17 @@ class TestField(unittest.TestCase):
         self.assertEqual(field._height, 3)
         self.assertEqual(field._cell_rows, [
             [False, False],
-            [True, False],
-            [True, True],
+            [True,  False],
+            [True,  True ],
         ])
 
     def test_get_neighbors_in_the_center(self):
         field = step_001.Field(5, 5)
         field._cell_rows = [
             [False, False, False, False, False],
-            [False, False, True, False, False],
-            [False, False, False, True, False],
-            [False, True, True, True, False],
+            [False, False, True,  False, False],
+            [False, False, False, True,  False],
+            [False, True,  True,  True,  False],
             [False, False, False, False, False],
         ]
 
@@ -63,9 +63,9 @@ class TestField(unittest.TestCase):
     def test_get_neighbors_in_the_corner(self):
         field = step_001.Field(3, 3)
         field._cell_rows = [
-            [True, False, False],
-            [False, True, True],
-            [False, True, True],
+            [True,  False, False],
+            [False, True,  True ],
+            [False, True,  True ],
         ]
 
         neighbors = field.get_neighbors(2, 2)
@@ -91,9 +91,9 @@ class TestField(unittest.TestCase):
         field = step_001.Field(5, 5)
         field._cell_rows = [
             [False, False, False, False, False],
-            [False, False, True, False, False],
-            [False, False, False, True, False],
-            [False, True, True, True, False],
+            [False, False, True,  False, False],
+            [False, False, False, True,  False],
+            [False, True,  True,  True,  False],
             [False, False, False, False, False],
         ]
 
@@ -104,9 +104,9 @@ class TestField(unittest.TestCase):
         self.assertEqual(next_field._cell_rows, [
             [False, False, False, False, False],
             [False, False, False, False, False],
-            [False, True, False, True, False],
-            [False, False, True, True, False],
-            [False, False, True, False, False],
+            [False, True,  False, True,  False],
+            [False, False, True,  True,  False],
+            [False, False, True,  False, False],
         ])
 
     def test_populate_with_not_square_field(self):
@@ -114,9 +114,9 @@ class TestField(unittest.TestCase):
         field._cell_rows = [
             [False, False, False, False, False],
             [False, False, False, False, False],
-            [False, False, True, False, False],
-            [False, False, False, True, False],
-            [False, True, True, True, False],
+            [False, False, True,  False, False],
+            [False, False, False, True,  False],
+            [False, True,  True,  True,  False],
             [False, False, False, False, False],
             [False, False, False, False, False],
         ]
@@ -129,8 +129,8 @@ class TestField(unittest.TestCase):
             [False, False, False, False, False],
             [False, False, False, False, False],
             [False, False, False, False, False],
-            [False, True, False, True, False],
-            [False, False, True, True, False],
-            [False, False, True, False, False],
+            [False, True,  False, True,  False],
+            [False, False, True,  True,  False],
+            [False, False, True,  False, False],
             [False, False, False, False, False],
         ])

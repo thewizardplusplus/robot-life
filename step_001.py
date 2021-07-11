@@ -39,9 +39,12 @@ class Field:
         next_field = Field(self._width, self._height)
         def _next_field_filler(column, row, cell):
             neighbors = self.get_neighbors(column, row)
+
             will_be_born = not cell and neighbors == 3
             will_survive = cell and (neighbors == 2 or neighbors == 3)
+
             next_field._cell_rows[row][column] = will_be_born or will_survive
 
         self.handle_cells(_next_field_filler)
+
         return next_field
