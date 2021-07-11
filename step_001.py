@@ -12,7 +12,7 @@ class Field:
 
             self._cells.append(line)
 
-    def for_each_cell(self, handler):
+    def handle_cells(self, handler):
         for y in range(self._height):
             for x in range(self._width):
                 cell = self._cells[y][x]

@@ -46,11 +46,11 @@ class TestField(unittest.TestCase):
             [True, True],
         ])
 
-    def test_for_each_cell(self):
+    def test_handle_cells(self):
         cells = []
 
         field = step_001.Field(2, 3)
-        field.for_each_cell(lambda x, y, cell: cells.append((x, y, cell)))
+        field.handle_cells(lambda x, y, cell: cells.append((x, y, cell)))
 
         self.assertEqual(cells, [
             (0, 0, False),
