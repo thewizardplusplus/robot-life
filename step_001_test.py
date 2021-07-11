@@ -23,7 +23,10 @@ class TestField(unittest.TestCase):
         ])
 
     def test_init_with_custom_generator(self):
-        field = step_001.Field(2, 3, lambda column, row: (column > 0 and row > 0) or row == 2)
+        def _generator(column, row):
+            return (column > 0 and row > 0) or row == 2
+
+        field = step_001.Field(2, 3, _generator)
 
         self.assertEqual(field._width, 2)
         self.assertEqual(field._height, 3)
@@ -35,8 +38,10 @@ class TestField(unittest.TestCase):
 
     def test_init_with_random_generator(self):
         random.seed(1) # reset the random generator for the test reproducibility
+        def _generator(column, row):
+            return random.choice([False, True])
 
-        field = step_001.Field(2, 3, lambda column, row: random.choice([False, True]))
+        field = step_001.Field(2, 3, _generator)
 
         self.assertEqual(field._width, 2)
         self.assertEqual(field._height, 3)
@@ -73,10 +78,15 @@ class TestField(unittest.TestCase):
         self.assertEqual(neighbors, 4)
 
     def test_handle_cells(self):
-        cells = []
+        def _generator(column, row):
+            return (column > 0 and row > 0) or row == 2
 
-        field = step_001.Field(2, 3, lambda column, row: (column > 0 and row > 0) or row == 2)
-        field.handle_cells(lambda column, row, cell: cells.append((column, row, cell)))
+        cells = []
+        def _handler(column, row, cell):
+            cells.append((column, row, cell))
+
+        field = step_001.Field(2, 3, _generator)
+        field.handle_cells(_handler)
 
         self.assertEqual(cells, [
             (0, 0, False),
