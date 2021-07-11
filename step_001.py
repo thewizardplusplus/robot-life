@@ -1,47 +1,47 @@
 class Field:
-    def __init__(self, width, height, generator=lambda x, y: False):
+    def __init__(self, width, height, generator=lambda column, row: False):
         self._width = width
         self._height = height
 
-        self._cells = []
-        for y in range(height):
-            line = []
-            for x in range(width):
-                cell = generator(x, y)
-                line.append(cell)
+        self._cell_rows = []
+        for row in range(height):
+            cell_row = []
+            for column in range(width):
+                cell = generator(column, row)
+                cell_row.append(cell)
 
-            self._cells.append(line)
+            self._cell_rows.append(cell_row)
 
-    def get_neighbors(self, x, y):
+    def get_neighbors(self, column, row):
         neighbors = 0
-        for dy in [-1, 0, 1]:
-            for dx in [-1, 0, 1]:
-                if dx == 0 and dy == 0:
+        for row_offset in [-1, 0, 1]:
+            for column_offset in [-1, 0, 1]:
+                if column_offset == 0 and row_offset == 0:
                     continue
 
                 # wrap the coordinates to simulate a toroidal field
-                wrapped_x = (x + dx + self._width) % self._width
-                wrapped_y = (y + dy + self._height) % self._height
+                transformed_column = (column + column_offset + self._width) % self._width
+                transformed_row = (row + row_offset + self._height) % self._height
 
-                cell = self._cells[wrapped_y][wrapped_x]
+                cell = self._cell_rows[transformed_row][transformed_column]
                 if cell:
                     neighbors += 1
 
         return neighbors
 
     def handle_cells(self, handler):
-        for y in range(self._height):
-            for x in range(self._width):
-                cell = self._cells[y][x]
-                handler(x, y, cell)
+        for row in range(self._height):
+            for column in range(self._width):
+                cell = self._cell_rows[row][column]
+                handler(column, row, cell)
 
     def populate(self):
         next_field = Field(self._width, self._height)
-        def _next_field_filler(x, y, cell):
-            neighbors = self.get_neighbors(x, y)
+        def _next_field_filler(column, row, cell):
+            neighbors = self.get_neighbors(column, row)
             will_be_born = not cell and neighbors == 3
             will_survive = cell and (neighbors == 2 or neighbors == 3)
-            next_field._cells[y][x] = will_be_born or will_survive
+            next_field._cell_rows[row][column] = will_be_born or will_survive
 
         self.handle_cells(_next_field_filler)
         return next_field
