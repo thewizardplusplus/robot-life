@@ -1,5 +1,6 @@
 import time
 
+from robot_life.runner import basic_run_field
 from robot_life.field import Field
 
 # https://www.conwaylife.com/wiki/Plaintext
@@ -20,18 +21,7 @@ def print_as_plaintext(field):
     print(to_plaintext(field))
 
 def run_field(field, population_period=0.1, handler=print_as_plaintext):
-    previous_time = time.time()
-    while True:
-        handler(field)
-
-        field = field.populate()
-
-        current_time = time.time()
-        elapsed_time = current_time - previous_time
-        if elapsed_time < population_period:
-            time.sleep(population_period - elapsed_time)
-
-        previous_time = current_time
+    basic_run_field(field, handler, population_period)
 
 # resolution of terminal VT100 by default
 def run_random_field(
