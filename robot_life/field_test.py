@@ -37,9 +37,9 @@ class TestField(unittest.TestCase):
         self.assertEqual(field._width, 2)
         self.assertEqual(field._height, 3)
         self.assertEqual(field._cell_rows, [
-            [False, False],
             [True,  False],
-            [True,  True ],
+            [False, False],
+            [False, True ],
         ])
 
     def test_get_neighbors_in_the_center(self):

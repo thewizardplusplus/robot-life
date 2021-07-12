@@ -3,7 +3,7 @@ import random
 class Field:
     @staticmethod
     def random_generator(column, row):
-        return random.choice([False, True])
+        return random.getrandbits(8) < 128
 
     def __init__(self, width, height, generator=lambda column, row: False):
         self._width = width
