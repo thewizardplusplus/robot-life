@@ -4,6 +4,16 @@ import random
 from robot_life.field import Field
 
 class TestField(unittest.TestCase):
+    def test_random_generator(self):
+        random.seed(1) # reset the random generator for the test reproducibility
+
+        cells = []
+        for _ in range(6):
+            cell = Field.random_generator(0, 0)
+            cells.append(cell)
+
+        self.assertEqual(cells, [True, False, False, False, False, True])
+
     def test_from_cell_rows(self):
         field = Field.from_cell_rows([
             [False, False],
