@@ -5,6 +5,20 @@ class Field:
     def random_generator(column, row):
         return random.getrandbits(8) < 128
 
+    @staticmethod
+    def from_cell_rows(cell_rows):
+        for cell_row in cell_rows[1:]:
+            if len(cell_row) != len(cell_rows[0]):
+                raise RuntimeError("rows have different length")
+
+        width = len(cell_rows[0]) if len(cell_rows) != 0 else 0
+        height = len(cell_rows)
+
+        def _generator(column, row):
+            return cell_rows[row][column]
+
+        return Field(width, height, _generator)
+
     def __init__(self, width, height, generator=lambda column, row: False):
         self._width = width
         self._height = height

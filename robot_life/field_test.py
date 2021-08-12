@@ -4,6 +4,29 @@ import random
 from robot_life.field import Field
 
 class TestField(unittest.TestCase):
+    def test_from_cell_rows(self):
+        field = Field.from_cell_rows([
+            [False, False],
+            [False, True ],
+            [True,  True ],
+        ])
+
+        self.assertEqual(field._width, 2)
+        self.assertEqual(field._height, 3)
+        self.assertEqual(field._cell_rows, [
+            [False, False],
+            [False, True ],
+            [True,  True ],
+        ])
+
+    def test_from_cell_rows_with_rows_of_different_lengths(self):
+        with self.assertRaisesRegex(RuntimeError, "rows have different length"):
+            Field.from_cell_rows([
+                [False, False],
+                [False, True, False],
+                [True,  True, False],
+            ])
+
     def test_init_with_default_generator(self):
         field = Field(2, 3)
 
