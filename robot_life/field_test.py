@@ -19,6 +19,13 @@ class TestField(unittest.TestCase):
             [True,  True ],
         ])
 
+    def test_from_cell_rows_without_cell_rows(self):
+        field = Field.from_cell_rows([])
+
+        self.assertEqual(field._width, 0)
+        self.assertEqual(field._height, 0)
+        self.assertEqual(field._cell_rows, [])
+
     def test_from_cell_rows_with_rows_of_different_lengths(self):
         with self.assertRaisesRegex(RuntimeError, "rows have different length"):
             Field.from_cell_rows([
@@ -64,6 +71,13 @@ class TestField(unittest.TestCase):
             [False, False],
             [False, True ],
         ])
+
+    def test_init_with_zero_width_and_height(self):
+        field = Field(0, 0)
+
+        self.assertEqual(field._width, 0)
+        self.assertEqual(field._height, 0)
+        self.assertEqual(field._cell_rows, [])
 
     def test_eq_with_not_equal_fields(self):
         field_one = Field.from_cell_rows([
