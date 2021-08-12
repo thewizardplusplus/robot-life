@@ -18,6 +18,9 @@ class Field:
 
             self._cell_rows.append(cell_row)
 
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
+
     def get_neighbors(self, column, row):
         neighbors = 0
         for row_offset in [-1, 0, 1]:

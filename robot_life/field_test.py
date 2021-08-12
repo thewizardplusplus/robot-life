@@ -42,6 +42,44 @@ class TestField(unittest.TestCase):
             [False, True ],
         ])
 
+    def test_eq_with_not_equal_fields(self):
+        field_one = Field(3, 3)
+        field_one._cell_rows = [
+            [False, True, False],
+            [False, True, False],
+            [False, True, False],
+        ]
+
+        field_two = Field(3, 3)
+        field_two._cell_rows = [
+            [False, False, False],
+            [True,  True,  True],
+            [False, False, False],
+        ]
+
+        are_equal = field_one == field_two
+
+        self.assertFalse(are_equal)
+
+    def test_eq_with_equal_fields(self):
+        field_one = Field(3, 3)
+        field_one._cell_rows = [
+            [False, True, False],
+            [False, True, False],
+            [False, True, False],
+        ]
+
+        field_two = Field(3, 3)
+        field_two._cell_rows = [
+            [False, True, False],
+            [False, True, False],
+            [False, True, False],
+        ]
+
+        are_equal = field_one == field_two
+
+        self.assertTrue(are_equal)
+
     def test_get_neighbors_in_the_center(self):
         field = Field(5, 5)
         field._cell_rows = [
