@@ -66,64 +66,56 @@ class TestField(unittest.TestCase):
         ])
 
     def test_eq_with_not_equal_fields(self):
-        field_one = Field(3, 3)
-        field_one._cell_rows = [
+        field_one = Field.from_cell_rows([
             [False, True, False],
             [False, True, False],
             [False, True, False],
-        ]
-
-        field_two = Field(3, 3)
-        field_two._cell_rows = [
+        ])
+        field_two = Field.from_cell_rows([
             [False, False, False],
             [True,  True,  True],
             [False, False, False],
-        ]
+        ])
 
         are_equal = field_one == field_two
 
         self.assertFalse(are_equal)
 
     def test_eq_with_equal_fields(self):
-        field_one = Field(3, 3)
-        field_one._cell_rows = [
+        field_one = Field.from_cell_rows([
             [False, True, False],
             [False, True, False],
             [False, True, False],
-        ]
-
-        field_two = Field(3, 3)
-        field_two._cell_rows = [
+        ])
+        field_two = Field.from_cell_rows([
             [False, True, False],
             [False, True, False],
             [False, True, False],
-        ]
+        ])
 
         are_equal = field_one == field_two
 
         self.assertTrue(are_equal)
 
     def test_get_neighbors_in_the_center(self):
-        field = Field(5, 5)
-        field._cell_rows = [
+        field = Field.from_cell_rows([
             [False, False, False, False, False],
             [False, False, True,  False, False],
             [False, False, False, True,  False],
             [False, True,  True,  True,  False],
             [False, False, False, False, False],
-        ]
+        ])
 
         neighbors = field.get_neighbors(1, 2)
 
         self.assertEqual(neighbors, 3)
 
     def test_get_neighbors_in_the_corner(self):
-        field = Field(3, 3)
-        field._cell_rows = [
+        field = Field.from_cell_rows([
             [True,  False, False],
             [False, True,  True ],
             [False, True,  True ],
-        ]
+        ])
 
         neighbors = field.get_neighbors(2, 2)
 
@@ -134,12 +126,11 @@ class TestField(unittest.TestCase):
         def _handler(column, row, cell):
             cells.append((column, row, cell))
 
-        field = Field(2, 3)
-        field._cell_rows = [
+        field = Field.from_cell_rows([
             [False, False],
             [True,  False],
             [True,  True ],
-        ]
+        ])
         field.handle_cells(_handler)
 
         self.assertEqual(cells, [
@@ -152,56 +143,52 @@ class TestField(unittest.TestCase):
         ])
 
     def test_populate_cell_that_will_be_born(self):
-        field = Field(5, 5)
-        field._cell_rows = [
+        field = Field.from_cell_rows([
             [False, False, False, False, False],
             [False, False, True,  False, False],
             [False, False, False, True,  False],
             [False, True,  True,  True,  False],
             [False, False, False, False, False],
-        ]
+        ])
 
         next_cell = field.populate_cell(2, 4)
 
         self.assertTrue(next_cell)
 
     def test_populate_cell_that_will_survive(self):
-        field = Field(5, 5)
-        field._cell_rows = [
+        field = Field.from_cell_rows([
             [False, False, False, False, False],
             [False, False, True,  False, False],
             [False, False, False, True,  False],
             [False, True,  True,  True,  False],
             [False, False, False, False, False],
-        ]
+        ])
 
         next_cell = field.populate_cell(2, 3)
 
         self.assertTrue(next_cell)
 
     def test_populate_cell_that_will_die(self):
-        field = Field(5, 5)
-        field._cell_rows = [
+        field = Field.from_cell_rows([
             [False, False, False, False, False],
             [False, False, True,  False, False],
             [False, False, False, True,  False],
             [False, True,  True,  True,  False],
             [False, False, False, False, False],
-        ]
+        ])
 
         next_cell = field.populate_cell(1, 3)
 
         self.assertFalse(next_cell)
 
     def test_populate(self):
-        field = Field(5, 5)
-        field._cell_rows = [
+        field = Field.from_cell_rows([
             [False, False, False, False, False],
             [False, False, True,  False, False],
             [False, False, False, True,  False],
             [False, True,  True,  True,  False],
             [False, False, False, False, False],
-        ]
+        ])
 
         next_field = field.populate()
 
@@ -216,8 +203,7 @@ class TestField(unittest.TestCase):
         ])
 
     def test_populate_with_not_square_field(self):
-        field = Field(5, 7)
-        field._cell_rows = [
+        field = Field.from_cell_rows([
             [False, False, False, False, False],
             [False, False, False, False, False],
             [False, False, True,  False, False],
@@ -225,7 +211,7 @@ class TestField(unittest.TestCase):
             [False, True,  True,  True,  False],
             [False, False, False, False, False],
             [False, False, False, False, False],
-        ]
+        ])
 
         next_field = field.populate()
 
