@@ -121,6 +121,32 @@ class TestField(unittest.TestCase):
 
         self.assertTrue(are_equal)
 
+    def test_get_cell_with_dead_cell(self):
+        field = Field.from_cell_rows([
+            [False, False, False, False, False],
+            [False, False, True,  False, False],
+            [False, False, False, True,  False],
+            [False, True,  True,  True,  False],
+            [False, False, False, False, False],
+        ])
+
+        cell = field.get_cell(1, 2)
+
+        self.assertFalse(cell)
+
+    def test_get_cell_with_alive_cell(self):
+        field = Field.from_cell_rows([
+            [False, False, False, False, False],
+            [False, False, True,  False, False],
+            [False, False, False, True,  False],
+            [False, True,  True,  True,  False],
+            [False, False, False, False, False],
+        ])
+
+        cell = field.get_cell(2, 1)
+
+        self.assertTrue(cell)
+
     def test_get_neighbors_in_the_center(self):
         field = Field.from_cell_rows([
             [False, False, False, False, False],

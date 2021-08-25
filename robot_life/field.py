@@ -35,6 +35,9 @@ class Field:
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
 
+    def get_cell(self, column, row):
+        return self._cell_rows[row][column]
+
     def get_neighbors(self, column, row):
         neighbors = 0
         for row_offset in [-1, 0, 1]:
@@ -51,7 +54,7 @@ class Field:
                 transformed_row = \
                     (transformed_row + self._height) % self._height
 
-                cell = self._cell_rows[transformed_row][transformed_column]
+                cell = self.get_cell(transformed_column, transformed_row)
                 if cell:
                     neighbors += 1
 
@@ -60,11 +63,11 @@ class Field:
     def handle_cells(self, handler):
         for row in range(self._height):
             for column in range(self._width):
-                cell = self._cell_rows[row][column]
+                cell = self.get_cell(column, row)
                 handler(column, row, cell)
 
     def populate_cell(self, column, row):
-        cell = self._cell_rows[row][column]
+        cell = self.get_cell(column, row)
         neighbors = self.get_neighbors(column, row)
 
         will_be_born = not cell and neighbors == 3
