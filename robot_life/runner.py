@@ -1,5 +1,17 @@
 import time
 
+def get_cell_brightness(field_history, column, row, maximal_level):
+    for index in range(maximal_level):
+        reversed_index = -(index + 1)
+        if reversed_index < -len(field_history):
+            continue
+
+        cell = field_history[reversed_index].get_cell(column, row)
+        if cell:
+            return maximal_level - index
+
+    return 0
+
 def basic_run_field(
     field,
     handler,

@@ -1,28 +1,27 @@
 import time
 
-from robot_life.runner import basic_run_field
+from robot_life.runner import get_cell_brightness, basic_run_field
 from robot_life.field import Field
 
 # https://www.conwaylife.com/wiki/Plaintext
-def to_plaintext(field_history):
+def to_plaintext(field_history, character_variants = ".*O"):
     characters = []
+    maximal_brightness = len(character_variants) - 1
     def _handler(column, row, cell):
         if characters != [] and column == 0:
             characters.append("\n")
 
-        previous_cell = field_history[-2].get_cell(column, row) \
-            if len(field_history) > 1 else False
-        character = "O" if cell \
-            else "*" if previous_cell \
-            else "."
+        brightness = \
+            get_cell_brightness(field_history, column, row, maximal_brightness)
+        character = character_variants[brightness]
         characters.append(character)
 
     field_history[-1].handle_cells(_handler)
 
     return "".join(characters)
 
-def print_as_plaintext(field_history):
-    print(to_plaintext(field_history))
+def print_as_plaintext(field_history, character_variants = ".*O"):
+    print(to_plaintext(field_history, character_variants))
 
 def run_field(
     field,
