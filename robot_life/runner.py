@@ -11,7 +11,7 @@ def basic_run_field(
     field_history = [field]
     previous_time = timer()
     while True:
-        handler(field)
+        handler(field_history)
 
         field = field.populate()
         if field in field_history:

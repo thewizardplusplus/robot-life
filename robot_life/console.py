@@ -4,7 +4,7 @@ from robot_life.runner import basic_run_field
 from robot_life.field import Field
 
 # https://www.conwaylife.com/wiki/Plaintext
-def to_plaintext(field):
+def to_plaintext(field_history):
     characters = []
     def _handler(column, row, cell):
         if characters != [] and column == 0:
@@ -13,12 +13,12 @@ def to_plaintext(field):
         character = "O" if cell else "."
         characters.append(character)
 
-    field.handle_cells(_handler)
+    field_history[-1].handle_cells(_handler)
 
     return "".join(characters)
 
-def print_as_plaintext(field):
-    print(to_plaintext(field))
+def print_as_plaintext(field_history):
+    print(to_plaintext(field_history))
 
 def run_field(
     field,

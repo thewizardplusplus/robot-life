@@ -13,7 +13,7 @@ class TestToPlaintext(unittest.TestCase):
             [False, False, False, False, False],
         ])
 
-        result = to_plaintext(field)
+        result = to_plaintext([field])
 
         self.assertEqual(
             result,
@@ -35,7 +35,7 @@ class TestToPlaintext(unittest.TestCase):
             [False, False, False, False, False],
         ])
 
-        result = to_plaintext(field)
+        result = to_plaintext([field])
 
         self.assertEqual(
             result,
