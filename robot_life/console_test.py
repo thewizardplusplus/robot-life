@@ -47,3 +47,35 @@ class TestToPlaintext(unittest.TestCase):
             ".....\n" +
             ".....",
         )
+
+    def test_to_plaintext_with_previous_field(self):
+        field_history = [
+            Field.from_cell_rows([
+                [False, False, False, False, False],
+                [False, False, True,  False, False],
+                [False, False, False, True,  False],
+                [False, True,  True,  True,  False],
+                [False, False, False, False, False],
+                [False, False, False, False, False],
+            ]),
+            Field.from_cell_rows([
+                [False, False, False, False, False],
+                [False, False, False, False, False],
+                [False, True,  False, True,  False],
+                [False, False, True,  True,  False],
+                [False, False, True,  False, False],
+                [False, False, False, False, False],
+            ]),
+        ]
+
+        result = to_plaintext(field_history)
+
+        self.assertEqual(
+            result,
+            ".....\n" +
+            "..*..\n" +
+            ".O.O.\n" +
+            ".*OO.\n" +
+            "..O..\n" +
+            ".....",
+        )

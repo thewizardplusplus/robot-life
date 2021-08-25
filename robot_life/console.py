@@ -10,7 +10,11 @@ def to_plaintext(field_history):
         if characters != [] and column == 0:
             characters.append("\n")
 
-        character = "O" if cell else "."
+        previous_cell = field_history[-2].get_cell(column, row) \
+            if len(field_history) > 1 else False
+        character = "O" if cell \
+            else "*" if previous_cell \
+            else "."
         characters.append(character)
 
     field_history[-1].handle_cells(_handler)
