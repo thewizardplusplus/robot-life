@@ -16,13 +16,15 @@ parser.add_argument("-P", "--period",
     type=float, default=0.1, help="population period")
 parser.add_argument("-C", "--capacity",
     type=float, default=1_000_000, help="maximal history capacity")
+parser.add_argument("-V", "--variants",
+    default=".oO", help="character variants")
 
 args = parser.parse_args()
 
 field = Field(args.width, args.height, Field.random_generator)
 basic_run_field(
     field,
-    lambda field_history: print(to_plaintext(field_history)),
+    lambda field_history: print(to_plaintext(field_history, args.variants)),
     args.period,
     args.capacity,
 )
