@@ -1,7 +1,7 @@
 from robot_life.runner import get_cell_brightness
 
 # https://www.conwaylife.com/wiki/Plaintext
-def to_plaintext(field_history, character_variants = ".*O"):
+def to_plaintext(field_history, character_variants = ".oO"):
     characters = []
     maximal_brightness = len(character_variants) - 1
     def _handler(column, row, cell):

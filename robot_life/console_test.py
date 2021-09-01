@@ -93,9 +93,9 @@ class TestToPlaintext(unittest.TestCase):
         self.assertEqual(
             result,
             ".....\n" +
-            "..*..\n" +
+            "..o..\n" +
             ".O.O.\n" +
-            ".*OO.\n" +
+            ".oOO.\n" +
             "..O..\n" +
             ".....",
         )
