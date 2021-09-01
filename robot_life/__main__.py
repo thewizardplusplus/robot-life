@@ -1,7 +1,7 @@
 import argparse
 
 from robot_life.field import Field
-from robot_life.runner import basic_run_field
+from robot_life.runner import run_field
 from robot_life.console import to_plaintext
 
 parser = argparse.ArgumentParser(
@@ -22,7 +22,7 @@ parser.add_argument("-V", "--variants",
 args = parser.parse_args()
 
 field = Field(args.width, args.height, Field.random_generator)
-basic_run_field(
+run_field(
     field,
     lambda field_history: print(to_plaintext(field_history, args.variants)),
     args.period,

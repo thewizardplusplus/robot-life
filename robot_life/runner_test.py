@@ -1,7 +1,7 @@
 import unittest
 
 from robot_life.field import Field
-from robot_life.runner import get_cell_brightness, basic_run_field
+from robot_life.runner import get_cell_brightness, run_field
 
 class TestGetCellBrightness(unittest.TestCase):
     def test_with_alive_cell_in_last_population(self):
@@ -76,7 +76,7 @@ class TestGetCellBrightness(unittest.TestCase):
 
         self.assertEqual(brightness, 0)
 
-class TestBasicRunField(unittest.TestCase):
+class TestRunField(unittest.TestCase):
     def test_basic(self):
         initial_field = Field.from_cell_rows([
             [False, False, False, False, False, False, False, False, False],
@@ -94,7 +94,7 @@ class TestBasicRunField(unittest.TestCase):
         def _handler(field_history):
             field_histories.append(field_history.copy())
 
-        basic_run_field(initial_field, _handler)
+        run_field(initial_field, _handler)
 
         wanted_field_histories = [
             Field.from_cell_rows([
@@ -197,7 +197,7 @@ class TestBasicRunField(unittest.TestCase):
         def _handler(field_history):
             field_histories.append(field_history.copy())
 
-        basic_run_field(initial_field, _handler)
+        run_field(initial_field, _handler)
 
         self.assertEqual(field_histories, [[
             Field.from_cell_rows([
@@ -221,7 +221,7 @@ class TestBasicRunField(unittest.TestCase):
         def _handler(field_history):
             field_histories.append(field_history.copy())
 
-        basic_run_field(initial_field, _handler)
+        run_field(initial_field, _handler)
 
         wanted_field_histories = [
             Field.from_cell_rows([
@@ -260,7 +260,7 @@ class TestBasicRunField(unittest.TestCase):
                 raise RuntimeError("stop")
 
         with self.assertRaisesRegex(RuntimeError, "stop"):
-            basic_run_field(initial_field, _handler, maximal_history_capacity=1)
+            run_field(initial_field, _handler, maximal_history_capacity=1)
 
         wanted_field_histories = [
             Field.from_cell_rows([
@@ -309,7 +309,7 @@ class TestBasicRunField(unittest.TestCase):
         def _sleeper(delay):
             delays.append(delay)
 
-        basic_run_field(initial_field, _handler, timer=_timer, sleeper=_sleeper)
+        run_field(initial_field, _handler, timer=_timer, sleeper=_sleeper)
 
         wanted_field_histories = [
             Field.from_cell_rows([
@@ -357,7 +357,7 @@ class TestBasicRunField(unittest.TestCase):
         def _sleeper(delay):
             raise RuntimeError("should not be called")
 
-        basic_run_field(initial_field, _handler, timer=_timer, sleeper=_sleeper)
+        run_field(initial_field, _handler, timer=_timer, sleeper=_sleeper)
 
         wanted_field_histories = [
             Field.from_cell_rows([

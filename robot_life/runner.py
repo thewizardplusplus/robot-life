@@ -12,7 +12,7 @@ def get_cell_brightness(field_history, column, row, maximal_level):
 
     return 0
 
-def basic_run_field(
+def run_field(
     field,
     handler,
     population_period=0.1,
