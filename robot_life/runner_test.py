@@ -1,7 +1,80 @@
 import unittest
 
 from robot_life.field import Field
-from robot_life.runner import basic_run_field
+from robot_life.runner import get_cell_brightness, basic_run_field
+
+class TestGetCellBrightness(unittest.TestCase):
+    def test_with_alive_cell_in_last_population(self):
+        field_history = [
+            Field.from_cell_rows([
+                [False, False, False, False, False],
+                [False, False, True,  False, False],
+                [False, False, False, True,  False],
+                [False, True,  True,  True,  False],
+                [False, False, False, False, False],
+                [False, False, False, False, False],
+            ]),
+            Field.from_cell_rows([
+                [False, False, False, False, False],
+                [False, False, False, False, False],
+                [False, True,  False, True,  False],
+                [False, False, True,  True,  False],
+                [False, False, True,  False, False],
+                [False, False, False, False, False],
+            ]),
+        ]
+
+        brightness = get_cell_brightness(field_history, 1, 2, 2)
+
+        self.assertEqual(brightness, 2)
+
+    def test_with_alive_cell_in_previous_population(self):
+        field_history = [
+            Field.from_cell_rows([
+                [False, False, False, False, False],
+                [False, False, True,  False, False],
+                [False, False, False, True,  False],
+                [False, True,  True,  True,  False],
+                [False, False, False, False, False],
+                [False, False, False, False, False],
+            ]),
+            Field.from_cell_rows([
+                [False, False, False, False, False],
+                [False, False, False, False, False],
+                [False, True,  False, True,  False],
+                [False, False, True,  True,  False],
+                [False, False, True,  False, False],
+                [False, False, False, False, False],
+            ]),
+        ]
+
+        brightness = get_cell_brightness(field_history, 2, 1, 2)
+
+        self.assertEqual(brightness, 1)
+
+    def test_with_dead_cell(self):
+        field_history = [
+            Field.from_cell_rows([
+                [False, False, False, False, False],
+                [False, False, True,  False, False],
+                [False, False, False, True,  False],
+                [False, True,  True,  True,  False],
+                [False, False, False, False, False],
+                [False, False, False, False, False],
+            ]),
+            Field.from_cell_rows([
+                [False, False, False, False, False],
+                [False, False, False, False, False],
+                [False, True,  False, True,  False],
+                [False, False, True,  True,  False],
+                [False, False, True,  False, False],
+                [False, False, False, False, False],
+            ]),
+        ]
+
+        brightness = get_cell_brightness(field_history, 2, 2, 2)
+
+        self.assertEqual(brightness, 0)
 
 class TestBasicRunField(unittest.TestCase):
     def test_basic(self):
