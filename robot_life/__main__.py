@@ -17,7 +17,7 @@ parser.add_argument("-P", "--period",
 parser.add_argument("-C", "--capacity",
     type=float, default=1_000_000, help="maximal history capacity")
 parser.add_argument("-V", "--variants",
-    default=".oO", help="character variants")
+    default=".:*#O", help="character variants")
 
 args = parser.parse_args()
 

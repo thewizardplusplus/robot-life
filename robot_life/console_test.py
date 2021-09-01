@@ -88,7 +88,7 @@ class TestToPlaintext(unittest.TestCase):
             ]),
         ]
 
-        result = to_plaintext(field_history)
+        result = to_plaintext(field_history, ".oO")
 
         self.assertEqual(
             result,
