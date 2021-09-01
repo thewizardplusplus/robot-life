@@ -1,4 +1,4 @@
-from robot_life.runner import get_cell_brightness
+from robot_life.running import get_cell_brightness
 
 # https://www.conwaylife.com/wiki/Plaintext
 def to_plaintext(field_history, character_variants=".O"):

@@ -1,7 +1,7 @@
 import unittest
 
 from robot_life.field import Field
-from robot_life.console import to_plaintext
+from robot_life.serializing_for_console import to_plaintext
 
 class TestToPlaintext(unittest.TestCase):
     def test_basic(self):

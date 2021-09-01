@@ -1,7 +1,7 @@
 import unittest
 
 from robot_life.field import Field
-from robot_life.runner import get_cell_brightness, run_field
+from robot_life.running import get_cell_brightness, run_field
 
 class TestGetCellBrightness(unittest.TestCase):
     def test_with_alive_cell_in_last_population(self):

@@ -1,8 +1,8 @@
 import argparse
 
 from robot_life.field import Field
-from robot_life.runner import run_field
-from robot_life.console import to_plaintext
+from robot_life.running import run_field
+from robot_life.serializing_for_console import to_plaintext
 
 parser = argparse.ArgumentParser(
     prog="python3 -m robot_life",
