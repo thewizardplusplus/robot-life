@@ -10,6 +10,22 @@ To run the unit tests, use the following command:
 $ make test
 ```
 
+## Usage of the Console Version
+
+```
+$ python3 -m robot_life -h | --help
+$ python3 -m robot_life [options]
+```
+
+Options:
+
+- `-h`, `--help` &mdash; show this help message and exit;
+- `-W WIDTH`, `--width WIDTH` &mdash; field width (default: `80`);
+- `-H HEIGHT`, `--height HEIGHT` &mdash; field height (default: `24`);
+- `-P PERIOD`, `--period PERIOD` &mdash; population period (default: `0.1`);
+- `-C CAPACITY`, `--capacity CAPACITY` &mdash; maximal history capacity (default: `1000000`);
+- `-V VARIANTS`, `--variants VARIANTS` &mdash; character variants (default: `.:*#O`).
+
 ## License
 
 The MIT License (MIT)
