@@ -10,6 +10,18 @@ To run the unit tests, use the following command:
 $ make test
 ```
 
+## Building
+
+For the convenience of uploading the script to the LEGO® MINDSTORMS® intelligent Hub, it is worth combining all parts of the project together.
+
+To do this, use the following command:
+
+```
+$ make build
+```
+
+The resulting file will be available at path `builds/robot_life.py`.
+
 ## Usage of the Console Version
 
 ```
