@@ -1,6 +1,15 @@
 # robot-life
 
+Conway's Game of Life on LEGO® MINDSTORMS® Robot Inventor.
+
 _**Disclaimer:** LEGO® and MINDSTORMS® is a trademark of the LEGO Group of companies which does not sponsor, authorize or endorse this project._
+
+## Features
+
+- simulating of a toroidal field;
+- use of the random filling as the initial population;
+- restarting of the game after repeating of the same population;
+- use of several brightness levels for displaying previous populations.
 
 ## Testing
 
