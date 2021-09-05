@@ -28,7 +28,7 @@ class TestToLightMatrix(unittest.TestCase):
             ]),
         ]
 
-        result = to_light_matrix(_set_pixel, field_history, 2)
+        result = to_light_matrix(_set_pixel, field_history, 3)
 
         self.assertEqual(pixels, [
             (0, 0, 0), (1, 0,   0), (2, 0,   0), (3, 0,   0), (4, 0, 0),
