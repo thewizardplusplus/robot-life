@@ -6,6 +6,8 @@ Conway's Game of Life on LEGO® MINDSTORMS® Robot Inventor.
 
 _**Disclaimer:** LEGO® and MINDSTORMS® is a trademark of the LEGO Group of companies which does not sponsor, authorize or endorse this project._
 
+⚠️ _**Warning:** if the program freezes, restart the LEGO® MINDSTORMS® intelligent Hub by long-pressing its center button._
+
 ## Features
 
 - simulating of a toroidal field;
