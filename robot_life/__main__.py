@@ -23,8 +23,9 @@ args = parser.parse_args()
 
 field = Field(args.width, args.height, Field.random_generator)
 run_field(
-    field,
-    lambda field_history: print(to_plaintext(field_history, args.variants)),
-    args.period,
-    args.capacity,
+    field=field,
+    handler=lambda field_history: \
+        print(to_plaintext(field_history, args.variants)),
+    population_period=args.period,
+    maximal_history_capacity=args.capacity,
 )
