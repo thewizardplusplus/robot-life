@@ -33,7 +33,7 @@ To do this, use the following command:
 $ make build
 ```
 
-The resulting file will be available at path `builds/robot_life.py`.
+The resulting file will be available at path [builds/robot_life.py](builds/robot_life.py).
 
 ## Deploying
 
@@ -41,7 +41,7 @@ To deploy the building result, follow the steps below:
 
 1. Create a new Python project in the LEGO® MINDSTORMS® Robot Inventor app.
 2. Remove the whole default code.
-3. Copy and paste the code from the building result (see file `builds/robot_life.py`).
+3. Copy and paste the code from the building result (see file [builds/robot_life.py](builds/robot_life.py)).
 
 ## Usage of the Console Version
 
